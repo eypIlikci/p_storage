@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
     public GenericResponse extractionProductPiece(UpdateProductPieceRequest request) {
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(() -> new ServiceException(ErrorMessage.ID));
-        product.setPiece(product.getPiece().remainder(request.getValue()));
+        product.setPiece(product.getPiece().subtract(request.getValue()));
         productRepository.save(product);
         return new GenericResponse();
     }
